@@ -21,20 +21,6 @@ public class ProvinciaServiceImpl implements ProvinciaService {
 
 	@Override
 	public List<Provincia> getAll() {
-//		List<Provincia> provincias = new ArrayList<Provincia>();
-//		
-//		Provincia p1 = new Provincia();
-//		p1.setId(1L);
-//		p1.setNombre("Santa Fe");
-//		provincias.add(p1);
-//		
-//		Provincia p2 = new Provincia();
-//		p2.setId(2L);
-//		p2.setNombre("Entre Rios");
-//		provincias.add(p1);
-//
-//		return provincias;
-		
 		return repo.findAll();
 	}
 
@@ -42,10 +28,6 @@ public class ProvinciaServiceImpl implements ProvinciaService {
 
 	@Override
 	public Provincia getById(Long idCiudad) {
-//		Provincia c = new Provincia();
-//		c.setId(1L);
-//		c.setNombre("Santa Fe");
-//		return c;
 		return repo.findById(idCiudad).get();
 	}
 

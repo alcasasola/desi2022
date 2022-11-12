@@ -4,6 +4,7 @@ package com.tsti.smn.capaServicios;
 import java.util.List;
 
 import com.tsti.smn.capaPresentacion.ciudades.CiudadesBuscarForm;
+import com.tsti.smn.excepciones.Excepcion;
 import com.tsti.smn.pojos.Ciudad;
 /**
  * Clase que permite gestionar la entidad Ciudad en el sistema.
@@ -28,10 +29,10 @@ public interface CiudadService {
 	 */
 	Ciudad getById(Long idCiudad) ;
 	
-	List<Ciudad> filter(CiudadesBuscarForm filter);
+	List<Ciudad> filter(CiudadesBuscarForm filter) throws Excepcion;
 
 	void deleteByid(Long id);
 
-	void save(Ciudad c);
+	void save(Ciudad c) throws Excepcion;
 
 }

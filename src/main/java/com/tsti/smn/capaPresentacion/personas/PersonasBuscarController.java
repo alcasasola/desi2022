@@ -2,11 +2,14 @@ package com.tsti.smn.capaPresentacion.personas;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,17 +45,21 @@ public class PersonasBuscarController {
     }
     
     @RequestMapping( method=RequestMethod.POST)
-    public String submit( PersonasBuscarForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
-    	
+    public String submit( @ModelAttribute("formBean")  @Valid  PersonasBuscarForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
+         	
     	
     	if(action.equals("Buscar"))
     	{
     		
     		
-    		List<Persona> personas = service.filter(formBean);
-    		
+    		try {
+    			List<Persona> personas = service.filter(formBean);
+            	modelo.addAttribute("resultados",personas);
+			} catch (Exception e) {
+				ObjectError error = new ObjectError("globalError", e.getMessage());
+	            result.addError(error);
+			}
         	modelo.addAttribute("formBean",formBean);
-        	modelo.addAttribute("resultados",personas);
         	return "personasBuscar";
     	}
     

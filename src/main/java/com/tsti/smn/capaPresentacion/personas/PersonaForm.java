@@ -17,16 +17,16 @@ import com.tsti.smn.pojos.Persona;
  */
 public class PersonaForm {
 
-//	@NotNull(message = "el dni no puede ser nulo")
-//	@Min(value = 7000000, message = "el dni debe ser mayor a 7000000")
+	@NotNull(message = "el dni no puede ser nulo")
+	@Min(value = 7000000, message = "el dni debe ser mayor a 7000000")
 	private Long dni;
-//	@NotNull
-//	@Size(min=2, max=30)
+	@NotNull
+	@Size(min=2, max=30, message = "el valor debe estar entre 2 y 30")
 	private String apellido;
-//	@NotNull
-//	@Size(min=2, max=30)
+	@NotNull
+	@Size(min=2, max=30)
 	private String nombre;
-//	@NotNull
+	@NotNull
 	private Long idCiudad;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaNacimiento;

@@ -15,6 +15,7 @@
     </div>
     
 <form  th:action="@{/ciudadesBuscar}" th:object="${formBean}" method="post">
+	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
 	<table border="1" style="align-self: center;">
 		
         <tr>
@@ -74,6 +75,10 @@
 	      </tr>
 	    </tbody>
     </table>
+    
+                            
 </form>
+
+
 </body>
 </html>	

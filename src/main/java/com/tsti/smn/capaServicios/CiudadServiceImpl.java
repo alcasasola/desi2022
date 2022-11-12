@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.tsti.smn.capaDaos.ICiudadRepo;
 import com.tsti.smn.capaPresentacion.ciudades.CiudadesBuscarForm;
+import com.tsti.smn.excepciones.Excepcion;
 import com.tsti.smn.pojos.Ciudad;
 
 @Service
@@ -22,26 +23,7 @@ public class CiudadServiceImpl implements CiudadService {
 
 	@Override
 	public List<Ciudad> getAll() {
-//		List<Ciudad> ciudades = new ArrayList<Ciudad>();
-//		
-//		Provincia p1 = new Provincia();
-//		p1.setId(1L);
-//		p1.setNombre("Santa Fe");
-//		
-//		Ciudad c1 = new Ciudad();
-//		c1.setId(1L);
-//		c1.setNombre("Santa Fe");
-//		c1.setProvincia(p1);
-//		ciudades.add(c1);
-//		
-//		Ciudad c2 = new Ciudad();
-//		c2.setId(2L);
-//		c2.setNombre("Rafaela");
-//		c2.setProvincia(p1);
-//		ciudades.add(c2);
-//
-//		return ciudades;
-//		
+		
 		return repo.findAll();
 	}
 
@@ -49,42 +31,17 @@ public class CiudadServiceImpl implements CiudadService {
 
 	@Override
 	public Ciudad getById(Long idCiudad) {
-//		Provincia p1 = new Provincia();
-//		p1.setId(1L);
-//		p1.setNombre("Santa Fe");
-//		
-//		Ciudad c = new Ciudad();
-//		c.setId(1L);
-//		c.setNombre("Santa Fe");
-//		c.setProvincia(p1);
-//		return c;
+
 		return repo.findById(idCiudad).get();
 	}
 	
 	@Override
-	public List<Ciudad> filter(CiudadesBuscarForm filter)
+	public List<Ciudad> filter(CiudadesBuscarForm filter) throws Excepcion
 	{
-//		Provincia p1 = new Provincia();
-//		p1.setId(1L);
-//		p1.setNombre("Santa Fe");
-//		
-//		List<Ciudad> ciudades = new ArrayList<Ciudad>();
-//		Ciudad c1 = new Ciudad();
-//		c1.setId(1L);
-//		c1.setNombre("Santa Fe");
-//		c1.setProvincia(p1);
-//		ciudades.add(c1);
-//		
-//		Ciudad c2 = new Ciudad();
-//		c2.setId(2L);
-//		c2.setNombre("Rafaela");
-//		c2.setProvincia(p1);
-//		ciudades.add(c2);
-//
-//		return ciudades;
 		//ver https://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/jpa.repositories.html
 		if(filter.getNombre()==null && filter.getProvinciaSeleccionada()==null)
-			return repo.findAll();
+			//return repo.findAll();
+			throw new Excepcion("Es necesario al menos un filtro");
 		else
 			return repo.findByNombreOrIdProvincia(filter.getNombre(),filter.getProvinciaSeleccionada());
 				
@@ -101,8 +58,11 @@ public class CiudadServiceImpl implements CiudadService {
 
 
 	@Override
-	public void save(Ciudad c) {
-		repo.save(c);
+	public void save(Ciudad c) throws Excepcion {
+		if(c.getId()==null && !repo.findByNombreAndIdProvincia(c.getNombre(), c.getProvincia().getId()).isEmpty()) //estoy dando de alta una nueva ciudad y ya existe una igual?
+			throw new Excepcion("Ya existe una ciudad con el mismo nombre, para la misma provincia");  
+		else
+			repo.save(c);
 		
 	}
 

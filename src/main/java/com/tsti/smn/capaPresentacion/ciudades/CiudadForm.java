@@ -1,5 +1,8 @@
 package com.tsti.smn.capaPresentacion.ciudades;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.tsti.smn.pojos.Ciudad;
 
 /**
@@ -11,10 +14,10 @@ public class CiudadForm {
 
 	private Long id;
 
-//	@NotNull
-//	@Size(min=2, max=30)
+	@NotNull
+	@Size(min=2, max=30)
 	private String nombre;
-//	@NotNull
+	@NotNull
 	private Long idProvincia;
 	
 	

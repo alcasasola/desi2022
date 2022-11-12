@@ -3,6 +3,7 @@ package com.tsti.smn.capaServicios;
 import java.util.List;
 
 import com.tsti.smn.capaPresentacion.personas.PersonasBuscarForm;
+import com.tsti.smn.excepciones.Excepcion;
 import com.tsti.smn.pojos.Persona;
 
 public interface PersonaService {
@@ -11,13 +12,14 @@ public interface PersonaService {
 
 	List<Persona> getAll();
 
-	List<Persona> filter(PersonasBuscarForm filter);
+	List<Persona> filter(PersonasBuscarForm filter) throws Excepcion;
 
 	/**
 	 * Si la persona existe la actualizará, sino la creará en BD
 	 * @param persona
+	 * @throws Exception 
 	 */
-	void save(Persona persona);
+	void save(Persona persona) throws Excepcion;
 
 	/**
 	 * permite obtener una persona determinada 
