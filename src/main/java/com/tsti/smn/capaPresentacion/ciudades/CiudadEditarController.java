@@ -65,11 +65,6 @@ public class CiudadEditarController {
     	
     	if(action.equals("Aceptar"))
     	{
-    		//FieldError error = new FieldError("formBean","fechaNacimiento","la fecha de nacimiento es incorrecta.");
-            //result.addError(error);
-//    		ObjectError error = new ObjectError("globalError", "no puede guardar aún");
-//            result.addError(error);
-//            
     		if(result.hasErrors())
     		{
     			
@@ -101,10 +96,6 @@ public class CiudadEditarController {
 	    			return "ciudadEditar";  //Como existe un error me quedo en la misma pantalla
 				}
     		}
-
-    		
-        	
-        	
     	}
     
     	

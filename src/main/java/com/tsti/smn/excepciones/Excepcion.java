@@ -20,6 +20,7 @@ public class Excepcion extends Exception{
 
 	public Excepcion(String mensaje, String atributo) {
 		super(mensaje);
+		this.atributo=atributo;
 	}
 
 	public String getAtributo() {
